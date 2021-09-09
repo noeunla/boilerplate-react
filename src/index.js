@@ -1,15 +1,13 @@
-// (function helloWorld(){
-//     console.log('¡hello world!');
-// }());
 import React from 'react'
 import ReactDOM from 'react-dom'
- 
-const HelloWorldReact = () => {
+import BasicForm from './BasicForm'
+
+const App = () => {
  return (
-   <h1>
-     ¡Hello world from ReactJS!
-   </h1>
+   <div className="container">
+     <BasicForm />
+   </div>
  )
 }
  
-ReactDOM.render(<HelloWorldReact />, document.getElementById("root"))
+ReactDOM.render(<App />, document.getElementById("root"))
