@@ -1,5 +1,11 @@
 import React, { useEffect, useState }  from 'react'
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object().shape({
+    correo: Yup.string().email('Email not valid').required('Email us required'),
+    contrasenia: Yup.string().required('contraseña is required')
+})
 
 const LoginForm = () => {
     const [state, setState] = useState({correo:'',contrasenia:''})
@@ -9,6 +15,7 @@ const LoginForm = () => {
             correo: '',
             contrasenia:''
         },
+    validationSchema,
     onSubmit: values => {
             console.log(JSON.stringify(values));
         }
@@ -48,6 +55,10 @@ const LoginForm = () => {
             id="exampleFormControlInput1" 
             placeholder="name@example.com"
             value={formikForm.values.correo} />
+            {
+            formikForm.touched.email && formikForm.errors.correo &&
+            <span className="help-block text-danger">{formikForm.errors.email}</span>
+            }
         </div>
         <div className="col-6">
             <label htmlFor="exampleFormControlInput2" className="form-label">Password</label>
@@ -58,6 +69,10 @@ const LoginForm = () => {
             id="exampleFormControlInput2" 
             placeholder="********" 
             value={formikForm.values.contrasenia} />
+            {
+            formikForm.touched.contrasenia && formikForm.errors.contrasenia &&
+            <span className="help-block text-danger">{formikForm.errors.contrasenia}</span>
+            }
         </div>
         <br/>
         <div><button type="submit" className="btn btn-dark col-6" >Login</button></div>
