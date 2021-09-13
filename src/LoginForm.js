@@ -1,13 +1,15 @@
-import React, { useEffect, useState }  from 'react'
+import React, { useContext, useEffect, useState }  from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { AppContext } from '.';
 
 const validationSchema = Yup.object().shape({
-    correo: Yup.string().email('Email not valid').required('Email us required'),
+    correo: Yup.string().email('Email not valid').required('Email is required'),
     contrasenia: Yup.string().required('contraseña is required')
 })
 
 const LoginForm = () => {
+    const {loading, setLoading} = useContext(AppContext)
     const [state, setState] = useState({correo:'',contrasenia:''})
  
     const formikForm = useFormik({
